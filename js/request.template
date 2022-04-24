@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nhis:message p1:schemaLocation="https://www.his.bg https://www.his.bg/api/v1/NHIS-Nomenclatures.xsd" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance" xmlns:nhis="https://www.his.bg">
+    <nhis:header>
+        <nhis:sender value="4" />
+        <nhis:senderId value="0000000001" />
+        <nhis:senderISName value="DoseParserJS" />
+        <nhis:recipient value="4" />
+        <nhis:recipientId value="NHIS" />
+        <nhis:messageId value="{{messageId}}" />
+        <nhis:messageType value="C001" />
+        <nhis:createdOn value="{{createdOn}}" />
+    </nhis:header>
+    <nhis:contents>
+        <nhis:nomenclatureId value="{{nomenclatureId}}" />
+    </nhis:contents>
+</nhis:message>
