@@ -18,7 +18,7 @@
         /// <summary>
         /// Dose Quantity Unit
         /// </summary>
-        public string? DoseQuantityCode { get; set; }
+        public string DoseQuantityCode { get; set; }
 
         /// <summary>
         /// Frequency of execution
@@ -33,7 +33,7 @@
         /// <summary>
         /// Period Unit
         /// </summary>
-        public string? PeriodUnit { get; set; }
+        public string PeriodUnit { get; set; }
 
         /// <summary>
         /// Therapy Duration
@@ -43,7 +43,7 @@
         /// <summary>
         /// Therapy Duration Unit
         /// </summary>
-        public string? BoundsDurationUnit { get; set; }
+        public string BoundsDurationUnit { get; set; }
 
         /// <summary>
         /// When to Take
@@ -58,11 +58,11 @@
         /// <summary>
         /// Text instructions
         /// </summary>
-        public string? Text { get; set; }
+        public string Text { get; set; }
 
         /// <summary>
         /// Route
         /// </summary>
-        public string? Route { get; set; }
+        public string Route { get; set; }
     }
 }

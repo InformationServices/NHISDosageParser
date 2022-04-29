@@ -5,11 +5,11 @@ It exports methods to parse instruction and update according nomenclatures. In o
 
 For .Net Core 3.1 use:
 
-Install-Package NHISDosageParser -Version 3.1.0
+...
 
 For .Net 6.0 use:
 
-Install-Package NHISDosageParser -Version 6.0.0
+...
 
 For .Net Framework, please check the implementation in branch csharp-version-47
 

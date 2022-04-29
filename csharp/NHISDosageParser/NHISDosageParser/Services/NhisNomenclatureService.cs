@@ -21,13 +21,6 @@ namespace NHISDosageParser.Services
     /// </summary>
     public class NhisNomenclatureService : INhisNomenclatureService
     {
-        private readonly IHttpClientFactory httpClientFactory;
-
-        public NhisNomenclatureService(IHttpClientFactory _httpClientFactory)
-        {
-            httpClientFactory = _httpClientFactory;
-        }
-
         /// <summary>
         /// Load nomenclatures from files
         /// </summary>
@@ -57,7 +50,7 @@ namespace NHISDosageParser.Services
                 byte[] nom = await result.Content.ReadAsByteArrayAsync();
 
                 XmlSerializer serializer = new XmlSerializer(typeof(C002));
-                C002? message = null;
+                C002 message = null;
 
                 using (MemoryStream ms = new MemoryStream(nom))
                 {
@@ -72,11 +65,11 @@ namespace NHISDosageParser.Services
                         {
                             case "CL013":
                             case "CL034":
-                                await SaveOnlyNomenclature(nomenclature.entry, nomenclature.nomenclatureId.value.ToLower());
+                                SaveOnlyNomenclature(nomenclature.entry, nomenclature.nomenclatureId.value.ToLower());
                                 break;
                             case "CL020":
                             case "CL035":
-                                await SaveWithPlural(nomenclature.entry, nomenclature.nomenclatureId.value.ToLower());
+                                SaveWithPlural(nomenclature.entry, nomenclature.nomenclatureId.value.ToLower());
                                 break;
                             default:
                                 break;
@@ -93,7 +86,7 @@ namespace NHISDosageParser.Services
         /// <param name="entry">Nomenclature info</param>
         /// <param name="name">Nomenclature name</param>
         /// <returns></returns>
-        private async Task SaveOnlyNomenclature(messageContentsNomenclatureEntry[] entry, string name)
+        private void SaveOnlyNomenclature(messageContentsNomenclatureEntry[] entry, string name)
         {
             NhisNomenclature nomenclature = new NhisNomenclature()
             {
@@ -109,7 +102,7 @@ namespace NHISDosageParser.Services
 
             string strNomenclature = JsonConvert.SerializeObject(nomenclature);
 
-            await File.WriteAllTextAsync(@$"{Directory.GetCurrentDirectory()}/Nomenclatures/{name}.json", strNomenclature);
+            File.WriteAllText($@"{Directory.GetCurrentDirectory()}/Nomenclatures/{name}.json", strNomenclature);
         }
 
         /// <summary>
@@ -118,7 +111,7 @@ namespace NHISDosageParser.Services
         /// <param name="entry">Nomenclature info</param>
         /// <param name="name">Nomenclature name</param>
         /// <returns></returns>
-        private async Task SaveWithPlural(messageContentsNomenclatureEntry[] entry, string name)
+        private void SaveWithPlural(messageContentsNomenclatureEntry[] entry, string name)
         {
             NhisNomenclature nomenclature = new NhisNomenclature()
             {
@@ -139,7 +132,7 @@ namespace NHISDosageParser.Services
 
             string strNomenclature = JsonConvert.SerializeObject(nomenclature);
 
-            await File.WriteAllTextAsync(@$"{Directory.GetCurrentDirectory()}/Nomenclatures/{name}.json", strNomenclature);
+            File.WriteAllText($@"{Directory.GetCurrentDirectory()}/Nomenclatures/{name}.json", strNomenclature);
         }
 
         /// <summary>
@@ -197,7 +190,7 @@ namespace NHISDosageParser.Services
         {
             var request = new HttpRequestMessage(method, url);
             //request.Version = new Version(2, 0);
-            HttpClient client = httpClientFactory.CreateClient();
+            HttpClient client = new HttpClient();
 
             if (data != null)
             {
