@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Authors>Stamo Petkov</Authors>
+    <Company>Information Services Plc.</Company>
+    <PackageProjectUrl>https://github.com/InformationServices/NHISDosageParser</PackageProjectUrl>
+    <Description>This package can be used by bulgarian medical and pharmaceutical software developers to parse NHIS e-Prescription dosage instructions. It exports methods to parse instruction and update according nomenclatures.</Description>
+    <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
+    <Version>6.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Nomenclatures\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Nomenclatures\cl013.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Nomenclatures\cl020.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Nomenclatures\cl034.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Nomenclatures\cl035.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Nomenclatures\cl013.json">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</Content>
+		<Content Include="Nomenclatures\cl020.json">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</Content>
+		<Content Include="Nomenclatures\cl034.json">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</Content>
+		<Content Include="Nomenclatures\cl035.json">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</Content>
+	</ItemGroup>
+
+</Project>
