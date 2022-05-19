@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -23,9 +24,15 @@ namespace NHISDosageParser.Services
     {
         private readonly IHttpClientFactory httpClientFactory;
 
+        private readonly string nomenclaturesDirectory;
+
         public NhisNomenclatureService(IHttpClientFactory _httpClientFactory)
         {
             httpClientFactory = _httpClientFactory;
+            nomenclaturesDirectory = Path
+                .Combine(Path.GetDirectoryName(Assembly
+                .GetEntryAssembly()
+                .Location), "Nomenclatures") + Path.DirectorySeparatorChar;
         }
 
         /// <summary>
@@ -34,10 +41,10 @@ namespace NHISDosageParser.Services
         /// <returns>Tuple with loaded nomenclatures</returns>
         public (NhisNomenclature cl013, NhisNomenclature cl020, NhisNomenclature cl034, NhisNomenclature cl035) LoadNomenclatures()
         {
-            NhisNomenclature cl013 = JsonConvert.DeserializeObject<NhisNomenclature>(File.ReadAllText(@"Nomenclatures/cl013.json"));
-            NhisNomenclature cl020 = JsonConvert.DeserializeObject<NhisNomenclature>(File.ReadAllText(@"Nomenclatures/cl020.json"));
-            NhisNomenclature cl034 = JsonConvert.DeserializeObject<NhisNomenclature>(File.ReadAllText(@"Nomenclatures/cl034.json"));
-            NhisNomenclature cl035 = JsonConvert.DeserializeObject<NhisNomenclature>(File.ReadAllText(@"Nomenclatures/cl035.json"));
+            NhisNomenclature cl013 = JsonConvert.DeserializeObject<NhisNomenclature>(File.ReadAllText($"{nomenclaturesDirectory}cl013.json"));
+            NhisNomenclature cl020 = JsonConvert.DeserializeObject<NhisNomenclature>(File.ReadAllText($"{nomenclaturesDirectory}cl020.json"));
+            NhisNomenclature cl034 = JsonConvert.DeserializeObject<NhisNomenclature>(File.ReadAllText($"{nomenclaturesDirectory}cl034.json"));
+            NhisNomenclature cl035 = JsonConvert.DeserializeObject<NhisNomenclature>(File.ReadAllText($"{nomenclaturesDirectory}cl035.json"));
 
             return (cl013, cl020, cl034, cl035);
         }
@@ -109,7 +116,7 @@ namespace NHISDosageParser.Services
 
             string strNomenclature = JsonConvert.SerializeObject(nomenclature);
 
-            await File.WriteAllTextAsync(@$"{Directory.GetCurrentDirectory()}/Nomenclatures/{name}.json", strNomenclature);
+            await File.WriteAllTextAsync($"{nomenclaturesDirectory}{name}.json", strNomenclature);
         }
 
         /// <summary>
@@ -139,7 +146,7 @@ namespace NHISDosageParser.Services
 
             string strNomenclature = JsonConvert.SerializeObject(nomenclature);
 
-            await File.WriteAllTextAsync(@$"{Directory.GetCurrentDirectory()}/Nomenclatures/{name}.json", strNomenclature);
+            await File.WriteAllTextAsync($"{nomenclaturesDirectory}{name}.json", strNomenclature);
         }
 
         /// <summary>
