@@ -223,7 +223,7 @@ namespace NHISDosageParser.Services
         /// </summary>
         /// <param name="offset">Offset value</param>
         /// <returns></returns>
-        private string ConvertOffsetToText(int offset)
+        private string ConvertOffsetToText(int? offset)
         {
             string result = string.Empty;
 
