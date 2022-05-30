@@ -47,6 +47,15 @@ namespace NHISDosageParser.Services
         }
 
         /// <summary>
+        /// Load Medicine dosage form from file
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string,NhisForm> LoadMedicineDosageForm()
+        {
+            return JsonConvert.DeserializeObject<Dictionary<string, NhisForm>>(File.ReadAllText($"{nomenclaturesDirectory}form.json"));
+        }
+
+        /// <summary>
         /// Downloads nomenclatures from NHIS 
         /// and saves them to files
         /// </summary>

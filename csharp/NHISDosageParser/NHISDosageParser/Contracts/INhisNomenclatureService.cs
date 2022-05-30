@@ -1,4 +1,5 @@
 ﻿using NHISDosageParser.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NHISDosageParser.Contracts
@@ -21,5 +22,11 @@ namespace NHISDosageParser.Contracts
         /// </summary>
         /// <returns></returns>
         Task UpdateNomenclatures();
+
+        /// <summary>
+        /// Load Medicine dosage form from file
+        /// </summary>
+        /// <returns></returns>
+        Dictionary<string, NhisForm> LoadMedicineDosageForm();
     }
 }

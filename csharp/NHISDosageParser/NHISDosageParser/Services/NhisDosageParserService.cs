@@ -1,5 +1,6 @@
 ﻿using NHISDosageParser.Contracts;
 using NHISDosageParser.Models;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,12 @@ namespace NHISDosageParser.Services
         public NhisNomenclature Cl035 { get; set; }
 
         /// <summary>
+        /// Subset of Medicine dosage form
+        /// for use with Dosage Parser
+        /// </summary>
+        public Dictionary<string, NhisForm> Forms { get; set; }
+
+        /// <summary>
         /// Dependancy injection and 
         /// Initialization of nomenclatures
         /// </summary>
@@ -45,6 +52,7 @@ namespace NHISDosageParser.Services
         {
             nomenclatureService = _nomenclatureService;
             (Cl013, Cl020, Cl034, Cl035) = nomenclatureService.LoadNomenclatures();
+            Forms = _nomenclatureService.LoadMedicineDosageForm();
         }
 
         /// <summary>
@@ -171,11 +179,11 @@ namespace NHISDosageParser.Services
             {
                 if (isSigle)
                 {
-                    result = Cl035.Nom.ContainsKey(form) ? Cl035.Nom[form] : string.Empty;
+                    result = Forms.ContainsKey(form) ? Forms[form].Single : Forms["default"].Single;
                 }
                 else
                 {
-                    result = Cl035.NomPlural.ContainsKey(form) ? Cl035.NomPlural[form] : string.Empty;
+                    result = Forms.ContainsKey(form) ? Forms[form].Plural : Forms["default"].Plural;
                 }
             }
 
