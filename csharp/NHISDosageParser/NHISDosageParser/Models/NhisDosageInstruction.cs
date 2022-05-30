@@ -8,12 +8,12 @@
         /// <summary>
         /// Sequence of execution
         /// </summary>
-        public int Sequence { get; set; }
+        public int? Sequence { get; set; }
 
         /// <summary>
         /// Dose Quantity Value
         /// </summary>
-        public int DoseQuantityValue { get; set; }
+        public double DoseQuantityValue { get; set; }
 
         /// <summary>
         /// Dose Quantity Unit
@@ -28,7 +28,7 @@
         /// <summary>
         /// Period of execution
         /// </summary>
-        public int Period { get; set; }
+        public double Period { get; set; }
 
         /// <summary>
         /// Period Unit
@@ -38,7 +38,7 @@
         /// <summary>
         /// Therapy Duration
         /// </summary>
-        public int BoundsDuration { get; set; }
+        public decimal? BoundsDuration { get; set; }
 
         /// <summary>
         /// Therapy Duration Unit
@@ -53,7 +53,7 @@
         /// <summary>
         /// Offset to When to Take
         /// </summary>
-        public int Offset { get; set; }
+        public int? Offset { get; set; }
 
         /// <summary>
         /// Text instructions
