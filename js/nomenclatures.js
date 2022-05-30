@@ -26,6 +26,15 @@ const loadNomenclatures = () => {
 };
 
 /**
+ * Loads Medicine dosage form
+ * from files into JS Objects
+ * @returns form object
+ */
+const loadMedicineDosageForm = () => {
+    return JSON.parse(fs.readFileSync(`${__dirname}/form.json`));
+}
+
+/**
  * Parses and saves CL013 to file 
  * @param {object} nom - received nomenclature (parsed C002)
  */
@@ -198,4 +207,5 @@ const updateNomenclatures = () => {
 };
 
 exports.loadNomenclatures = loadNomenclatures;
+exports.loadMedicineDosageForm = loadMedicineDosageForm;
 exports.updateNomenclatures = updateNomenclatures;

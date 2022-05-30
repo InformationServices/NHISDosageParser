@@ -1,6 +1,6 @@
 {
   "name": "nhis-dosage-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "National Health Information System Prescription Dosage Instructions Parser",
   "main": "nhis-dosage-parser.js",
   "scripts": {

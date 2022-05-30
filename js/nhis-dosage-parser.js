@@ -1,5 +1,5 @@
 const nomenclatures = require("./nomenclatures");
-let cl013, cl020, cl034, cl035;
+let cl013, cl020, cl034, cl035, forms;
 
 /**
  * Processing A and B:
@@ -8,8 +8,18 @@ let cl013, cl020, cl034, cl035;
  *   -> represent as UCUM unit without brackets
  *   -> represent as CL035 description
  */
-const convertDosageFormToText = ( from, isSingle ) => {
-    return (isSingle === true) ? cl035["nom"][from] : cl035["nomPlural"][from];
+const convertDosageFormToText = ( form, isSingle ) => {
+    let result = "";
+    
+    if (form) {
+        result = (isSingle === true) ? forms["default"].single : forms["default"].plural;
+    }
+    
+    if (forms[form]) {
+        result = (isSingle === true) ? forms[form].single : forms[form].plural;
+    }
+
+    return result;
 }
 
 /**
@@ -49,6 +59,7 @@ const concatWhens = ( whens, nomenclature ) => {
 
 const dosageParser = ( dosage ) => {
     [cl013,cl020, cl034, cl035] = nomenclatures.loadNomenclatures();
+    forms = nomenclatures.loadMedicineDosageForm();
 
     /**
      * Full formula:
